@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.toco.study.main.mapper.MainMapper">
+	
+	<!-- 샘플 -->
+	<select id="getInfo" resultType="SampleVO">
+		SELECT NAME, AGE FROM SAMPLE
+	</select>
+	
+	<select id = "getOneInfo" parameterType="String" resultType = "SampleVO">
+		SELECT NAME, AGE, NO FROM SAMPLE WHERE NAME = #{ID}
+	</select>
+
+	<insert id="insertName" parameterType="SampleVO">
+    	INSERT INTO SAMPLE (NO, NAME, AGE) VALUES ((SELECT NVL(MAX(NO), 0) + 1 FROM SAMPLE), #{name}, #{age})
+	</insert>
+
+	<delete id="deleteOne" parameterType="String">
+		DELETE FROM SAMPLE WHERE NAME = #{ID}
+	</delete>
+</mapper>
